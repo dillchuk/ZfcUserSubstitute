@@ -1,5 +1,5 @@
 {
-    "name": "illchuk/ZfcUserSubsitute",
+    "name": "illchuk/zfc-user-subsitute",
     "description": "It's like the su command for ZfcUser & ZF3.",
     "type": "library",
     "license": "MIT",
