@@ -5,6 +5,7 @@ namespace ZfcUserSubstitute\Service;
 use Zend\Authentication\Storage\StorageInterface;
 use Zend\Authentication\AuthenticationService;
 use ZfcUser\Mapper\User as UserMapper;
+use PhpOption\Option as PhpOption;
 
 class Substitute {
 
@@ -32,38 +33,39 @@ class Substitute {
         $this->setStorage($storage);
     }
 
+    /**
+     * @param string $userId
+     * @return PhpOption error reason
+     */
     public function substitute($userId) {
-        $error['result'] = 'error';
-        $success['result'] = 'success';
-
         $identity = $this->getAuthService()->getIdentity();
         if (!$identity) {
-            return $error + ['message' => 'Not logged in'];
+            return PhpOption::ensure('Not logged in');
         }
         if (!$this->getStorage()->isEmpty()) {
-            return $error + ['message' => 'Already substituted'];
+            return PhpOption::ensure('Already substituted');
         }
         if (!$this->getUserMapper()->findById($userId)) {
-            return $error + ['message' => 'Substitution user does not exist'];
+            return PhpOption::ensure('Substitution user does not exist');
         }
 
         $this->getStorage()->write($identity);
         $this->getAuthService()->getStorage()->write($userId);
-        return $success;
+        return PhpOption::ensure(null);
     }
 
+    /**
+     * @return PhpOption error reason
+     */
     public function unsubstitute() {
-        $error['result'] = 'error';
-        $success['result'] = 'success';
-
         if ($this->getStorage()->isEmpty()) {
-            return $error + ['message' => 'Not substituted'];
+            return PhpOption::ensure('Not substituted in the first place');
         }
         $originalUser = $this->getStorage()->read();
         $this->getStorage()->clear();
 
         $this->getAuthService()->getStorage()->write($originalUser->getId());
-        return $success;
+        return PhpOption::ensure(null);
     }
 
     public function isSubstituted() {

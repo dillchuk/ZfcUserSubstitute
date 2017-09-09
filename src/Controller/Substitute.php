@@ -18,13 +18,19 @@ class Substitute extends AbstractActionController {
     }
 
     public function substituteAction() {
-        $result = $this->substituteService->substitute($this->params('user'));
-        return new JsonModel($result);
+        $errorOption = $this->substituteService->substitute($this->params('user'));
+        foreach ($errorOption as $error) {
+            return new JsonModel(['error' => $error]);
+        }
+        return $this->redirect()->toRoute('zfcuser');
     }
 
     public function unsubstituteAction() {
-        $result = $this->substituteService->unsubstitute();
-        return new JsonModel($result);
+        $errorOption = $this->substituteService->unsubstitute();
+        foreach ($errorOption as $error) {
+            return new JsonModel(['error' => $error]);
+        }
+        return $this->redirect()->toRoute('zfcuser');
     }
 
 }
