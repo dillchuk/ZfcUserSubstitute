@@ -1,0 +1,26 @@
+{
+    "name": "illchuk/ZfcUserSubsitute",
+    "description": "It's like the su command for ZfcUser & ZF3.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "zf3",
+        "zfcuser"
+    ],
+    "homepage": "https://github.com/dillchuk/ZfcUserSubstitute",
+    "authors": [
+        {
+            "name": "Derek Illchuk",
+            "email": "derek@illchuk.com",
+            "homepage": "http://www.derekillchuk.com"
+        }
+    ],
+    "require": {
+        "zf-commons/zfc-user": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "ZfcUserSubsitute": "src/"
+        }
+    }
+}
