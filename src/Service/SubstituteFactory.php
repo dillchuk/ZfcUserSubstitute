@@ -13,6 +13,7 @@ class SubstituteFactory implements FactoryInterface {
     ) {
         $service = new Substitute(
         $container->get('zfcuser_auth_service'),
+        $container->get('zfcuser_user_mapper'),
         new Session(Substitute::class, 'storage')
         );
         return $service;

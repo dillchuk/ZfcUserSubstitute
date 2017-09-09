@@ -4,6 +4,7 @@ namespace ZfcUserSubstitute\Service;
 
 use Zend\Authentication\Storage\StorageInterface;
 use Zend\Authentication\AuthenticationService;
+use ZfcUser\Mapper\User as UserMapper;
 
 class Substitute {
 
@@ -17,10 +18,17 @@ class Substitute {
      */
     protected $authService;
 
+    /**
+     * @var UserMapper
+     */
+    protected $userMapper;
+
     public function __construct(
-    AuthenticationService $authService, StorageInterface $storage
+    AuthenticationService $authService, UserMapper $userMapper,
+    StorageInterface $storage
     ) {
         $this->setAuthService($authService);
+        $this->setUserMapper($userMapper);
         $this->setStorage($storage);
     }
 
@@ -36,6 +44,10 @@ class Substitute {
             return $error + ['message' => 'Already substituted'];
         }
         $this->getStorage()->write($identity);
+
+        if (!$this->getUserMapper()->findById($userId)) {
+            return $error + ['message' => 'Substitution user does not exist'];
+        }
 
         $this->getAuthService()->getStorage()->write($userId);
         return $success;
@@ -88,6 +100,18 @@ class Substitute {
 
     public function setAuthService(AuthenticationService $authService) {
         $this->authService = $authService;
+        return $this;
+    }
+
+    /**
+     * @return UserMapper
+     */
+    public function getUserMapper() {
+        return $this->userMapper;
+    }
+
+    public function setUserMapper(UserMapper $userMapper) {
+        $this->userMapper = $userMapper;
         return $this;
     }
 
