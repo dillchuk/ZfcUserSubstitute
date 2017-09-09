@@ -43,12 +43,11 @@ class Substitute {
         if (!$this->getStorage()->isEmpty()) {
             return $error + ['message' => 'Already substituted'];
         }
-        $this->getStorage()->write($identity);
-
         if (!$this->getUserMapper()->findById($userId)) {
             return $error + ['message' => 'Substitution user does not exist'];
         }
 
+        $this->getStorage()->write($identity);
         $this->getAuthService()->getStorage()->write($userId);
         return $success;
     }
