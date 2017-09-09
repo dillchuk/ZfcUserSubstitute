@@ -1,5 +1,5 @@
 {
-    "name": "illchuk/zfc-user-subsitute",
+    "name": "illchuk/zfc-user-substitute",
     "description": "It's like the su command for ZfcUser & ZF3.",
     "type": "library",
     "license": "MIT",
@@ -20,7 +20,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ZfcUserSubsitute": "src/"
+            "ZfcUserSubstitute\\": "src/"
         }
     }
 }
