@@ -16,6 +16,7 @@
         }
     ],
     "require": {
+        "php": "^5.5|^7.0",
         "zf-commons/zfc-user": "^3.0"
     },
     "autoload": {

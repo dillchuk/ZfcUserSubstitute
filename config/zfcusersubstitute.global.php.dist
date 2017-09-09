@@ -1,0 +1,12 @@
+<?php
+
+/**
+ * Drop into ./config/autoload/
+ */
+$zfcuser = [
+    'auth_adapters' => [50 => 'ZfcUserSubstitute\Authentication\Adapter\Substitute'],
+];
+
+return [
+    'zfcuser' => $zfcuser,
+];
