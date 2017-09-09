@@ -5,7 +5,8 @@
     "license": "MIT",
     "keywords": [
         "zf3",
-        "zfcuser"
+        "zfcuser",
+        "zendframework"
     ],
     "homepage": "https://github.com/dillchuk/ZfcUserSubstitute",
     "authors": [
