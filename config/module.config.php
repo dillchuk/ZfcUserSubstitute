@@ -39,6 +39,7 @@ return [
                     'route' => '/admin/user',
                     'defaults' => [
                         'controller' => Controller\Substitute::class,
+                        'action' => 'substitute',
                     ],
                 ],
                 'may_terminate' => false,
@@ -46,10 +47,7 @@ return [
                     'substitute' => [
                         'type' => Segment::class,
                         'options' => [
-                            'route' => '/[:action]/:user',
-                            'constraints' => [
-                                'action' => 'substitute'
-                            ],
+                            'route' => '/substitute/:user',
                         ],
                     ],
                     'unsubstitute' => [
